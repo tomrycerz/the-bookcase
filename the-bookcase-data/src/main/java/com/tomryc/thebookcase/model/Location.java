@@ -11,6 +11,8 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String description;
+
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Book> books = new HashSet<>();
 }
