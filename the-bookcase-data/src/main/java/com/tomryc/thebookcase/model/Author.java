@@ -1,9 +1,17 @@
 package com.tomryc.thebookcase.model;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+
+@Getter
+@Setter
+@EqualsAndHashCode(exclude = {"books"})
 @Entity
 public class Author extends BaseEntity{
 
@@ -12,4 +20,5 @@ public class Author extends BaseEntity{
 
     @ManyToMany(mappedBy = "authors")
     private Set<Book> books = new HashSet<>();
+
 }
