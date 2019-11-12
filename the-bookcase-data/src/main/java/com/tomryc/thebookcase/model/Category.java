@@ -5,11 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Category {
+public class Category extends BaseEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String description;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")

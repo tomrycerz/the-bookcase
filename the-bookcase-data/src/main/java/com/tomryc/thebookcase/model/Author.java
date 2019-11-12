@@ -5,11 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Author {
+public class Author extends BaseEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String name;
     private String surname;
 

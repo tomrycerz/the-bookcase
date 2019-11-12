@@ -10,11 +10,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-public class Book {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Book extends BaseEntity{
 
     private String title;
     private String isbn;
