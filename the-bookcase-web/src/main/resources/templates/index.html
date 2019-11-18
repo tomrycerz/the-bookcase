@@ -18,15 +18,15 @@
 </head>
 
 <body>
-<!--/*@thymesVar id="recipes" type="java.util.List"*/-->
-<!--/*@thymesVar id="recipe" type="com.tomryc.domain.Recipe"*/-->
-<div class="container-fluid" style="margin-top: 20px">
+<!--/*@thymesVar id="books" type="java.util.List"*/-->
+<!--/*@thymesVar id="book" type="com.tomryc.thebookcase.model.Book"*/-->
+<div class="container-fluid" style="margin-top: 20px; margin-left: 20px" >
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-primary">
 
                 <div class="panel-heading">
-                    <h1 class="panel-title">My Books!</h1>
+                    <h1 class="panel-title">My Bookcase</h1>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive" th:if="${not #lists.isEmpty(books)}">
