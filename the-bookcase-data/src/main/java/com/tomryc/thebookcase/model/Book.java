@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -14,16 +12,19 @@ public class Book extends BaseEntity{
 
     private String title;
     private String isbn;
+    private String url;
 
-    @ManyToMany
-    @OrderBy("surname")
-    @JoinTable(name="book_authors",
+    @ManyToOne
+    @OrderBy("name")
+    @JoinTable(name="book_author",
         joinColumns = @JoinColumn(name="book_id"),
             inverseJoinColumns = @JoinColumn(name="author_id"))
-    private Set<Author> authors = new HashSet<>();
+    private Author author = new Author();
 
     @ManyToOne
     private Category category;
 
+    @ManyToOne
+    private Location location;
 }
 

@@ -21,7 +21,6 @@ public class AuthorCommandToAuthor implements Converter<AuthorCommand, Author> {
 
         author.setId(source.getId());
         author.setName(source.getName());
-        author.setSurname(source.getSurname());
 
         return author;
     }

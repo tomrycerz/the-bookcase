@@ -42,20 +42,24 @@ public class BookTest {
     }
 
     @Test
+    public void getUrl(){
+        String url = "https://www.url.com";
+        book.setUrl(url);
+        assertEquals(url, book.getUrl());
+    }
+
+    @Test
+    public void getAuthor(){
+        Author author = new Author();
+        book.setAuthor(author);
+        assertEquals(author, book.getAuthor());
+    }
+
+    @Test
     public void getCategory() {
         Category category = new Category();
         book.setCategory(category);
         assertEquals(category, book.getCategory());
     }
 
-    @Test
-    public void authorssEmptyWhenBookCreated(){
-        assertEquals(0, book.getAuthors().size());
-    }
-
-    @Test
-    public void authorsIsOneWhenAdded(){
-        book.getAuthors().add(new Author());
-        assertEquals(1,book.getAuthors().size());
-    }
 }

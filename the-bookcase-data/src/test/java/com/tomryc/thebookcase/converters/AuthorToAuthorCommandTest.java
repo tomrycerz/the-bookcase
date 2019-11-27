@@ -10,8 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AuthorToAuthorCommandTest {
 
-    public static final String NAME = "name";
-    public static final String SURNAME = "surname";
+    public static final String NAME = "name surname";
     public static final Long LONG_VALUE = 1L;
 
     private AuthorToAuthorCommand converter;
@@ -42,7 +41,7 @@ public class AuthorToAuthorCommandTest {
         Author author = new Author();
         author.setId(LONG_VALUE);
         author.setName(NAME);
-        author.setSurname(SURNAME);
+
 
         //when
         AuthorCommand command = converter.convert(author);
@@ -51,7 +50,6 @@ public class AuthorToAuthorCommandTest {
         assertNotNull(command);
         assertEquals(LONG_VALUE, command.getId());
         assertEquals(NAME, command.getName());
-        assertEquals(SURNAME, command.getSurname());
     }
 
 }

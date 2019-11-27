@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Show book</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+    >
+
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+<!--/*@thymesVar id="book" type="com.tomryc.thebookstore.model.Book"*/-->
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form th:object="${book}" th:action="@{/book/}" method="post">
+                <!--
+                                <div th:if="${#fields.hadErrors('*')}" class="alert alert-danger">
+                                    <p>Please correct errors below</p>
+                                </div>
+                -->
+                <input type="hidden" th:field="*{id}"/>
+                <div class="pannel-group">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Edit Book Information</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6 form-group" th:class="${#fields.hasErrors('title')}
+                                ? 'col-md-6 form-group has-error' : 'col-md-6 form-group'">
+                                    <label th:text="#{book.title}">Book Title:  </label>
+                                    <input type="text" class="form-control" th:field="*{title}" th:errorclass="has-error"/>
+                                    <span class="help-block" th:if="${#fields.hasErrors('title')}">
+                                        <ul>
+                                            <li th:each="err : ${#fields.errors('title')}" th:text="${err}"/>
+                                        </ul>
+                                    </span>
+                                </div>
+                                <div class="col-md-6 form-group" th:class="${#fields.hasErrors('author')}
+                                ? 'col-md-6 form-group has-error' : 'col-md-6 form-group'">
+                                    <label th:text="#{book.author}">Author:  </label>
+                                    <select class="form-control" name="author.id">
+                                        <option th:each="authorEach : ${authors}"
+                                                th:value="${authorEach.id}"
+                                                th:selected="${authorEach.id.equals(book.author.id)}"
+                                                th:text="${authorEach.name}"
+                                        >val
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 form-group" th:class="${#fields.hasErrors('author')}
+                                ? 'col-md-6 form-group has-error' : 'col-md-6 form-group'">
+                                    <label th:text="#{book.category}">Category: </label>
+                                    <select class="form-control" name="category.id">
+                                        <option th:each="categoryEach : ${categories}"
+                                            th:value="${categoryEach.id}"
+                                            th:selected="${categoryEach.id.equals(book.category.id)}"
+                                            th:text="${categoryEach.description}">val
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 form-group" th:class="${#fields.hasErrors('title')}
+                                ? 'col-md-6 form-group has-error' : 'col-md-6 form-group'">
+                                    <label th:text="#{book.isbn}">ISBN: </label>
+                                    <input type="text" class="form-control" th:field="*{isbn}" th:errorclass="has-error"/>
+                                    <span class="help-block" th:if="${#fields.hasErrors('isbn')}">
+                                        <ul>
+                                            <li th:each="err : ${#fields.errors('isbn')}" th:text="${err}"/>
+                                        </ul>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 form-group" th:class="${#fields.hasErrors('title')}
+                                ? 'col-md-6 form-group has-error' : 'col-md-6 form-group'">
+                                    <label th:text="#{book.url}">URL:  </label>
+                                    <input type="text" class="form-control" th:field="*{url}" th:errorclass="has-error"/>
+                                    <span class="help-block" th:if="${#fields.hasErrors('url')}">
+                                        <ul>
+                                            <li th:each="err : ${#fields.errors('url')}" th:text="${err}"/>
+                                        </ul>
+                                    </span>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title" >Notes</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <textarea class="form-control" rows="3"></textarea>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title" >Location</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                    <div class="col-md-3 form-group" th:class="${#fields.hasErrors('author')}
+                                ? 'col-md-3 form-group has-error' : 'col-md-3 form-group'">
+                                        <label th:text="#{book.location}">Location:  </label>
+                                        <select class="form-control" name="location.id">
+                                            <option th:each="locationEach : ${locations}"
+                                                    th:value="${locationEach.id}"
+                                                    th:selected="${locationEach.id.equals(book.location.id)}"
+                                                    th:text="${locationEach.description}"
+                                            >val
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

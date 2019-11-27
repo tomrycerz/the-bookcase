@@ -1,5 +1,6 @@
 package com.tomryc.thebookcase.model;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +15,6 @@ public class Location extends BaseEntity{
 
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="location")
     private Set<Book> books = new HashSet<>();
 }

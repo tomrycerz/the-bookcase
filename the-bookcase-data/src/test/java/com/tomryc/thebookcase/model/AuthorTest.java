@@ -23,16 +23,9 @@ public class AuthorTest {
 
     @Test
     public void getName() {
-        String name = "John";
+        String name = "John Rambo";
         author.setName(name);
         assertEquals(name, author.getName());
-    }
-
-    @Test
-    public void getSurname() {
-        String surname = "Rambo";
-        author.setSurname(surname);
-        assertEquals(surname, author.getSurname());
     }
 
     @Test

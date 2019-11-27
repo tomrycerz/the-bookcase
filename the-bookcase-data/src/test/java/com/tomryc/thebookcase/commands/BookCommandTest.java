@@ -49,14 +49,10 @@ class BookCommandTest {
     }
 
     @Test
-    public void authorssEmptyWhenBookCreated(){
-        assertEquals(0, bookCommand.getAuthors().size());
-    }
-
-    @Test
-    public void authorsIsOneWhenAdded(){
-        bookCommand.getAuthors().add(new AuthorCommand());
-        assertEquals(1,bookCommand.getAuthors().size());
+    public void getAuthors(){
+        AuthorCommand authorCommand = new AuthorCommand();
+        bookCommand.setAuthor(authorCommand);
+        assertEquals(authorCommand, bookCommand.getAuthor());
     }
 
 }

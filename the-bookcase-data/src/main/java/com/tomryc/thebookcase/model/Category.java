@@ -14,7 +14,7 @@ public class Category extends BaseEntity{
 
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    @OneToMany(mappedBy = "category")
     private Set<Book> books = new HashSet<>();
 
 }

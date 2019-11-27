@@ -19,11 +19,10 @@ public class BookToBookCommandTest {
     private static final Long CAT_ID = 1L;
     private static final String CAT_DESCRIPTION = "description";
     private static final Long AUTH_ID1 = 1L;
-    private static final Long AUTH_ID2 = 2L;
 
     @BeforeEach
     public void setUp(){
-        converter = new BookToBookCommand(new CategoryToCategoryCommand(), new AuthorToAuthorCommand());
+        converter = new BookToBookCommand(new CategoryToCategoryCommand(), new AuthorToAuthorCommand(), new LocationToLocationCommand());
     }
 
     @AfterEach
@@ -58,11 +57,7 @@ public class BookToBookCommandTest {
         Author author1 = new Author();
         author1.setId(AUTH_ID1);
 
-        Author author2 = new Author();
-        author2.setId(AUTH_ID2);
-
-        book.getAuthors().add(author1);
-        book.getAuthors().add(author2);
+        book.setAuthor(author1);
 
         //when
         BookCommand bookCommand = converter.convert(book);
@@ -74,7 +69,7 @@ public class BookToBookCommandTest {
         assertEquals(ISBN, bookCommand.getIsbn());
         assertEquals(CAT_ID, bookCommand.getCategory().getId());
         assertEquals(CAT_DESCRIPTION, bookCommand.getCategory().getDescription());
-        assertEquals(2, book.getAuthors().size());
+        assertEquals(AUTH_ID1, bookCommand.getAuthor().getId());
 
     }
 

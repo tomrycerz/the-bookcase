@@ -23,16 +23,9 @@ public class AuthorCommandTest {
 
     @Test
     public void getName() {
-        String name = "John";
+        String name = "John Rambo";
         authorCommand.setName(name);
         assertEquals(name, authorCommand.getName());
-    }
-
-    @Test
-    public void getSurname() {
-        String surname = "Rambo";
-        authorCommand.setSurname(surname);
-        assertEquals(surname, authorCommand.getSurname());
     }
 
 }

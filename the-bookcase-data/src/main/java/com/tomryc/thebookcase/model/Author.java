@@ -3,6 +3,7 @@ package com.tomryc.thebookcase.model;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -13,12 +14,12 @@ import java.util.Set;
 @Setter
 @EqualsAndHashCode(callSuper = true, exclude = {"books"})
 @Entity
+@ToString
 public class Author extends BaseEntity{
 
     private String name;
-    private String surname;
 
-    @ManyToMany(mappedBy = "authors")
+    @OneToMany(mappedBy = "author")
     private Set<Book> books = new HashSet<>();
 
 }

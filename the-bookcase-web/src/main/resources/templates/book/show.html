@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show book</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+          >
+
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+<!--/*@thymesVar id="book" type="com.tomryc.thebookstore.model.Book"*/-->
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="pannel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <h1 class="panel-title" th:text="${book.title}">Book Title Here!</h1>
+                            </div>
+                            <div class="col-md-3">
+                                <a class="btn btn-default" href="#"
+                                   th:href="@{'/book/' + ${book.id} + '/image'}" role="button">Change Image</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-8 form-group">
+                                <label>Description:</label>
+                                <!--<a th:text=${book.author.name} th:href="@{'/authors/' + ${book.author.id}}">Author</a>-->
+                            </div>
+                            <div class="col-md-4">
+                                <img  src="../../static/images/default-book.png"
+                                      th:src="@{'/book/' + ${book.id} + '/bookimage'}"
+                                      width="200" height="200">
+                            </div>
+                            <!--<div class="col-md-6">
+                                <img src="../../static/images/guacamole400x400WithX.jpg"
+                                     th:src="@{/images/guacamole400x400WithX.jpg}"
+                                     width="200" height="200">
+                            </div>-->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <b>Author:</b>
+                            </div>
+                            <div class="col-md-4">
+                                <p><a th:text=${book.author.name} th:href="@{'/authors/' + ${book.author.id}}">
+                                    Author</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <b>Category:</b>
+                            </div>
+                            <div class="col-md-2">
+                                <p><a th:text="${book.category.description}"
+                                      th:href="@{'/categories/' + ${book.category.id}}">Category</a></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <b>ISBN:</b>
+                            </div>
+                            <div class="col-md-2">
+                                <p  th:text="${book.isbn}">ISBN</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <b>URL:</b>
+                            </div>
+                            <div class="col-md-6">
+                                <p><a th:href="@{${book.url}}">About a book</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title" >Notes</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p> <!--th:text="${book.title}"-->Place for note</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title" >Location</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p><a th:text="${book.location.description}"
+                                   th:href="@{'/locations/' + ${book.location.id}}">Location</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

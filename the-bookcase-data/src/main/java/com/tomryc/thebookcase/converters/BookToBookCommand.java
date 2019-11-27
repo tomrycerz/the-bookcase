@@ -12,10 +12,12 @@ public class BookToBookCommand implements Converter<Book, BookCommand> {
 
     private final CategoryToCategoryCommand categoryConverter;
     private final AuthorToAuthorCommand authorConverter;
+    private final LocationToLocationCommand locationConverter;
 
-    public BookToBookCommand(CategoryToCategoryCommand categoryConverter, AuthorToAuthorCommand authorConverter) {
+    public BookToBookCommand(CategoryToCategoryCommand categoryConverter, AuthorToAuthorCommand authorConverter, LocationToLocationCommand locationConverter) {
         this.categoryConverter = categoryConverter;
         this.authorConverter = authorConverter;
+        this.locationConverter = locationConverter;
     }
 
     @Synchronized
@@ -30,10 +32,14 @@ public class BookToBookCommand implements Converter<Book, BookCommand> {
         bookCommand.setTitle(source.getTitle());
         bookCommand.setIsbn(source.getIsbn());
         bookCommand.setCategory(categoryConverter.convert(source.getCategory()));
+        bookCommand.setUrl(source.getUrl());
 
-        if(source.getAuthors() != null && source.getAuthors().size() > 0){
-            source.getAuthors()
-                    .forEach(author -> bookCommand.getAuthors().add(authorConverter.convert(author)));
+        if(source.getAuthor() != null){
+            bookCommand.setAuthor(authorConverter.convert(source.getAuthor()));
+        }
+
+        if(source.getLocation() != null){
+            bookCommand.setLocation(locationConverter.convert(source.getLocation()));
         }
 
         return bookCommand;
