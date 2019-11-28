@@ -38,6 +38,9 @@ public class BookController {
     @GetMapping("book/new")
     public String newBook(Model model){
         model.addAttribute("book", new BookCommand());
+        model.addAttribute("categories", categoryService.listAllCategories());
+        model.addAttribute("locations", locationService.listAllLocations());
+        model.addAttribute("authors", authorService.getAuthors());
 
         return "book/bookform";
     }
