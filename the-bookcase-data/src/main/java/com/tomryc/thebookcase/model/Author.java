@@ -20,8 +20,8 @@ public class Author extends BaseEntity{
     private String name;
     private String url;
 
-    @OrderBy("name")
-    @OneToMany(mappedBy = "author")
+    @OrderBy("title")
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private Set<Book> books = new HashSet<>();
 
 }

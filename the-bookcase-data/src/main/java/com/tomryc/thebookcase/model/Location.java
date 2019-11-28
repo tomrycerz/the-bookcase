@@ -15,6 +15,6 @@ public class Location extends BaseEntity{
 
     private String description;
 
-    @OneToMany(mappedBy="location")
+    @OneToMany(mappedBy="location", cascade = CascadeType.ALL)
     private Set<Book> books = new HashSet<>();
 }

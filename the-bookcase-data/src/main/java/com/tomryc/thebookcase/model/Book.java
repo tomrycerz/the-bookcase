@@ -15,15 +15,15 @@ public class Book extends BaseEntity{
     private String url;
 
     @ManyToOne
-    @JoinTable(name="book_author",
-        joinColumns = @JoinColumn(name="book_id"),
-            inverseJoinColumns = @JoinColumn(name="author_id"))
+    //    @JoinTable  (name="book_author",
+    //        joinColumns = @JoinColumn(name="book_id"),
+    //            inverseJoinColumns = @JoinColumn(name="author_id"))
     private Author author = new Author();
 
     @ManyToOne
-    private Category category;
+    private Category category = new Category();
 
     @ManyToOne
-    private Location location;
+    private Location location = new Location();
 }
 

@@ -46,4 +46,11 @@ public class AuthorController {
 
         return "redirect:/authors/" + savedCommand.getId() + "/show";
     }
+
+    @GetMapping("authors/{id}/delete")
+    public String deleteById(@PathVariable("id") String id){
+        authorService.deleteById(Long.valueOf(id));
+
+        return "redirect:/";
+    }
 }
