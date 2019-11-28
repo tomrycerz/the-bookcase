@@ -2,11 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Show book</title>
+    <title>Show author</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
-          >
+    >
 
     <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
 
@@ -17,7 +17,7 @@
 
 </head>
 <body>
-<!--/*@thymesVar id="book" type="com.tomryc.thebookstore.model.Book"*/-->
+<!--/*@thymesVar id="author" type="com.tomryc.theauthorstore.model.author"*/-->
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -26,11 +26,11 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-md-9">
-                                <label class="panel-title" th:text="${book.title}">Book Title Here!</label>
+                                <h1 class="panel-title" th:text="${author.name}">Author Name Here!</h1>
                             </div>
                             <div class="col-md-3">
                                 <a class="btn btn-default" href="#"
-                                   th:href="@{'/book/' + ${book.id} + '/image'}" role="button">Change Image</a>
+                                   th:href="@{'/author/' + ${author.id} + '/image'}" role="button">Change Image</a>
                             </div>
                         </div>
                     </div>
@@ -38,44 +38,11 @@
                         <div class="row">
                             <div class="col-md-8 form-group">
                                 <label>Description:</label>
-                                <!--<a th:text=${book.author.name} th:href="@{'/authors/' + ${book.author.id}}">Author</a>-->
                             </div>
                             <div class="col-md-4">
-                                <img  src="../../static/images/default-book.png"
-                                      th:src="@{'/book/' + ${book.id} + '/bookimage'}"
+                                <img  src="../../static/images/default-author.png"
+                                      th:src="@{'/author/' + ${author.id} + '/authorimage'}"
                                       width="200" height="200">
-                            </div>
-                            <!--<div class="col-md-6">
-                                <img src="../../static/images/guacamole400x400WithX.jpg"
-                                     th:src="@{/images/guacamole400x400WithX.jpg}"
-                                     width="200" height="200">
-                            </div>-->
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <b>Author:</b>
-                            </div>
-                            <div class="col-md-4">
-                                <p><a th:text=${book.author.name} th:href="@{'/authors/' + ${book.author.id} + '/show'}">
-                                    Author</a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <b>Category:</b>
-                            </div>
-                            <div class="col-md-2">
-                                <p><a th:text="${book.category.description}"
-                                      th:href="@{'/categories/' + ${book.category.id}}">Category</a></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <b>ISBN:</b>
-                            </div>
-                            <div class="col-md-2">
-                                <p  th:text="${book.isbn}">ISBN</p>
                             </div>
                         </div>
                         <div class="row">
@@ -83,7 +50,7 @@
                                 <b>URL:</b>
                             </div>
                             <div class="col-md-6">
-                                <p><a th:href="@{${book.url}}">About a book</a></p>
+                                <p><a th:href="@{${author.url}}">About an author</a></p>
                             </div>
                         </div>
                     </div>
@@ -95,20 +62,23 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <p> <!--th:text="${book.title}"-->Place for note</p>
+                                <p> <!--th:text="${author.title}"-->Place for note</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h1 class="panel-title" >Location</h1>
+                        <h1 class="panel-title" >Author's Books in My Bookstore:</h1>
                     </div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <p><a th:text="${book.location.description}"
-                                   th:href="@{'/locations/' + ${book.location.id}}">Location in My Bookstore</a></p>
+                                <ul>
+                                    <li th:each="book : ${author.books}">
+                                        <a th:text=${book.title} th:href="@{'/book/' + ${book.id} + '/show'}"></a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>

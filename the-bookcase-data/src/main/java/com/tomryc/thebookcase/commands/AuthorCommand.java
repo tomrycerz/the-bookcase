@@ -13,4 +13,5 @@ public class AuthorCommand {
 
     private Long id;
     private String name;
+    private String url;
 }

@@ -15,7 +15,6 @@ public class Book extends BaseEntity{
     private String url;
 
     @ManyToOne
-    @OrderBy("name")
     @JoinTable(name="book_author",
         joinColumns = @JoinColumn(name="book_id"),
             inverseJoinColumns = @JoinColumn(name="author_id"))

@@ -18,7 +18,9 @@ import java.util.Set;
 public class Author extends BaseEntity{
 
     private String name;
+    private String url;
 
+    @OrderBy("name")
     @OneToMany(mappedBy = "author")
     private Set<Book> books = new HashSet<>();
 
