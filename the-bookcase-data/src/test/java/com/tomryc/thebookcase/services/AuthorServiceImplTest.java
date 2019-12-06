@@ -3,6 +3,7 @@ package com.tomryc.thebookcase.services;
 import com.tomryc.thebookcase.commands.AuthorCommand;
 import com.tomryc.thebookcase.converters.AuthorCommandToAuthor;
 import com.tomryc.thebookcase.converters.AuthorToAuthorCommand;
+import com.tomryc.thebookcase.exceptions.NotFoundException;
 import com.tomryc.thebookcase.model.Author;
 import com.tomryc.thebookcase.repositories.AuthorRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import javax.swing.text.html.Option;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -97,5 +99,15 @@ public class AuthorServiceImplTest {
 
         //then
         verify(authorRepository, times(1)).deleteById(anyLong());
+    }
+
+    @Test
+    public void getAuthorByIdNotFoundTest() throws Exception{
+
+    Optional<Author>authorOptional = Optional.empty();
+
+    when(authorRepository.findById(anyLong())).thenReturn(authorOptional);
+
+    assertThrows(NotFoundException.class, ()->authorService.findById(1l));
     }
 }

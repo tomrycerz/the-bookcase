@@ -3,6 +3,7 @@ package com.tomryc.thebookcase.services;
 import com.tomryc.thebookcase.commands.LocationCommand;
 import com.tomryc.thebookcase.converters.LocationCommandToLocation;
 import com.tomryc.thebookcase.converters.LocationToLocationCommand;
+import com.tomryc.thebookcase.exceptions.NotFoundException;
 import com.tomryc.thebookcase.model.Location;
 import com.tomryc.thebookcase.repositories.LocationRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -42,8 +43,7 @@ public class LocationServiceImpl implements LocationService{
         Optional<Location> locationOptional = locationRepository.findById(id);
 
         if(!locationOptional.isPresent()){
-            // TODO: 28/11/2019 add NotFoundException(RunTime)exception
-            //throw new Exception();
+            throw new NotFoundException("Author not found. For ID value: " + id.toString());
         }
         return locationOptional.get();
     }

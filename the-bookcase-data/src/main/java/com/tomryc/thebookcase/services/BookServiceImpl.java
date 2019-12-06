@@ -3,6 +3,7 @@ package com.tomryc.thebookcase.services;
 import com.tomryc.thebookcase.commands.BookCommand;
 import com.tomryc.thebookcase.converters.BookCommandToBook;
 import com.tomryc.thebookcase.converters.BookToBookCommand;
+import com.tomryc.thebookcase.exceptions.NotFoundException;
 import com.tomryc.thebookcase.model.Book;
 import com.tomryc.thebookcase.repositories.BookRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -41,8 +42,7 @@ public class BookServiceImpl implements BookService{
         Optional<Book> bookOptional = bookRepository.findById(l);
 
         if(!bookOptional.isPresent()) {
-            // TODO: 17/11/2019 add new Exception
-            //throw new Exception();
+            throw new NotFoundException("Book not found. For ID value: " + l.toString());
         }
             return bookOptional.get();
     }

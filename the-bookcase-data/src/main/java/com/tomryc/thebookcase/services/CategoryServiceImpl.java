@@ -3,6 +3,7 @@ package com.tomryc.thebookcase.services;
 import com.tomryc.thebookcase.commands.CategoryCommand;
 import com.tomryc.thebookcase.converters.CategoryCommandToCategory;
 import com.tomryc.thebookcase.converters.CategoryToCategoryCommand;
+import com.tomryc.thebookcase.exceptions.NotFoundException;
 import com.tomryc.thebookcase.model.Category;
 import com.tomryc.thebookcase.repositories.CategoryRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -43,8 +44,7 @@ public class CategoryServiceImpl implements CategoryService {
         Optional<Category> locationOptional = categoryRepository.findById(id);
 
         if(!locationOptional.isPresent()){
-            // TODO: 28/11/2019 add NotFoundException(RunTime)exception
-            //throw new Exception();
+            throw new NotFoundException("Category not found. For ID value: " + id.toString());
         }
         return locationOptional.get();
     }

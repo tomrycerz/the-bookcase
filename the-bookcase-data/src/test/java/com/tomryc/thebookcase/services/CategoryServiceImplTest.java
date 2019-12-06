@@ -4,24 +4,26 @@ package com.tomryc.thebookcase.services;
 import com.tomryc.thebookcase.commands.CategoryCommand;
 import com.tomryc.thebookcase.converters.CategoryCommandToCategory;
 import com.tomryc.thebookcase.converters.CategoryToCategoryCommand;
+import com.tomryc.thebookcase.exceptions.NotFoundException;
 import com.tomryc.thebookcase.model.Category;
 import com.tomryc.thebookcase.repositories.CategoryRepository;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 public class CategoryServiceImplTest {
 
     CategoryToCategoryCommand categoryToCategoryCommand = new CategoryToCategoryCommand();
-    CategoryService service;
+    CategoryService categoryService;
 
     @Mock
     CategoryRepository categoryRepository;
@@ -33,7 +35,7 @@ public class CategoryServiceImplTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        service = new CategoryServiceImpl(categoryRepository, categoryToCategoryCommand, categoryCommandToCategory);
+        categoryService = new CategoryServiceImpl(categoryRepository, categoryToCategoryCommand, categoryCommandToCategory);
     }
 
     @Test
@@ -51,11 +53,20 @@ public class CategoryServiceImplTest {
         when(categoryRepository.findAll()).thenReturn(categorys);
 
         //when
-        Set<CategoryCommand> commands = service.listAllCategories();
+        Set<CategoryCommand> commands = categoryService.listAllCategories();
 
         //then
         assertEquals(2, commands.size());
         verify(categoryRepository, times(1)).findAll();
     }
 
+    @Test
+    public void getCategoryByIdNotFoundTest() throws Exception{
+
+        Optional<Category> authorOptional = Optional.empty();
+
+        when(categoryRepository.findById(anyLong())).thenReturn(authorOptional);
+
+        assertThrows(NotFoundException.class, () -> categoryService.findById(1l));
+    }
 }

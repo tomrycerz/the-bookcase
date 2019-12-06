@@ -3,6 +3,7 @@ package com.tomryc.thebookcase.services;
 import com.tomryc.thebookcase.commands.BookCommand;
 import com.tomryc.thebookcase.converters.BookCommandToBook;
 import com.tomryc.thebookcase.converters.BookToBookCommand;
+import com.tomryc.thebookcase.exceptions.NotFoundException;
 import com.tomryc.thebookcase.model.Book;
 import com.tomryc.thebookcase.repositories.BookRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -103,5 +104,15 @@ public class BookServiceImplTest {
 
         //then
         verify(bookRepository, times(1)).deleteById(anyLong());
+    }
+
+    @Test
+    public void getBookByIdNotFoundTest() throws Exception{
+
+        Optional<Book>authorOptional = Optional.empty();
+
+        when(bookRepository.findById(anyLong())).thenReturn(authorOptional);
+
+        assertThrows(NotFoundException.class, ()->bookService.findById(1l));
     }
 }

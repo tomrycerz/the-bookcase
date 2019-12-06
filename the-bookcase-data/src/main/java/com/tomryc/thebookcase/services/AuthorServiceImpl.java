@@ -3,6 +3,7 @@ package com.tomryc.thebookcase.services;
 import com.tomryc.thebookcase.commands.AuthorCommand;
 import com.tomryc.thebookcase.converters.AuthorCommandToAuthor;
 import com.tomryc.thebookcase.converters.AuthorToAuthorCommand;
+import com.tomryc.thebookcase.exceptions.NotFoundException;
 import com.tomryc.thebookcase.model.Author;
 import com.tomryc.thebookcase.repositories.AuthorRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -40,8 +41,7 @@ public class AuthorServiceImpl implements AuthorService {
         Optional<Author> authorOptional = authorRepository.findById(l);
 
         if(!authorOptional.isPresent()){
-        // TODO: 17/11/2019 add NotFoundException(RunTime)exception
-            //throw new Exception();
+            throw new NotFoundException("Author not found. For ID value: " + l.toString());
         }
         return authorOptional.get();
     }
