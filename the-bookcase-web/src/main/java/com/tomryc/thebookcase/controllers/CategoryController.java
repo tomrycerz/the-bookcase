@@ -28,21 +28,21 @@ public class CategoryController {
     public String newCategory(Model model){
         model.addAttribute("category", new CategoryCommand());
 
-        return "categories/categoryform";
+        return "category/categoryform";
     }
 
     @GetMapping("categories/{id}/update")
     public String updateCategory(@PathVariable String id, Model model){
         model.addAttribute("category", categoryService.findCommandById(Long.valueOf(id)));
 
-        return "categories/categoryform";
+        return "category/categoryform";
     }
 
     @PostMapping("category")
     public String saveOrUpdate(@ModelAttribute("category") CategoryCommand command){
         CategoryCommand savedCommand = categoryService.saveCategoryCommand(command);
 
-        return "redirect:/categories" + savedCommand.getId() + "/show";
+        return "redirect:/categories/" + savedCommand.getId() + "/show";
     }
 
     @GetMapping("categories/{id}/delete")

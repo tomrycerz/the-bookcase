@@ -28,21 +28,21 @@ public class LocationController {
     public String newLocation(Model model){
         model.addAttribute("location", new LocationCommand());
 
-        return "locations/locationform";
+        return "location/locationform";
     }
 
     @GetMapping("locations/{id}/update")
     public String updateLocation(@PathVariable String id, Model model){
         model.addAttribute("location", locationService.findCommandById(Long.valueOf(id)));
 
-        return "locations/locationform";
+        return "location/locationform";
     }
 
     @PostMapping("location")
     public String saveOrUpdate(@ModelAttribute("location") LocationCommand command){
         LocationCommand savedCommand = locationService.saveLocationCommand(command);
 
-        return "redirect:/locations" + savedCommand.getId() + "/show";
+        return "redirect:/locations/" + savedCommand.getId() + "/show";
     }
 
     @GetMapping("locations/{id}/delete")
